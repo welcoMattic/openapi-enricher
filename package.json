@@ -16,7 +16,7 @@
     "openapi-mock-optimizer": "index.js"
   },
   "dependencies": {
-    "commander": "^9.4.1",
+    "commander": "^9.4.1"
   },
   "engines": {
     "node": ">=16"
