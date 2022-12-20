@@ -6,7 +6,7 @@
 
 1. Install openapi-enricher with `npm install openapi-enricher`
 2. Write your response exemples in a JSON file, following the provided template (examples.json)
-3. Run `npw openapi-enricher openapi.json -e examples.json -o enriched.json`
+3. Run `npx openapi-enricher openapi.json -e examples.json -o enriched.json`
 
 ## Limitations
 
