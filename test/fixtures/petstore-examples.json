@@ -1,0 +1,64 @@
+{
+  "paths": {
+    "/pet/{petId}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Find pet by ID",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "doggie": {
+                    "value": {
+                      "id": 0,
+                      "category": {
+                        "id": 0,
+                        "name": "string"
+                      },
+                      "name": "doggie",
+                      "photoUrls": [
+                        "string"
+                      ],
+                      "tags": [
+                        {
+                          "id": 0,
+                          "name": "string"
+                        }
+                      ],
+                      "status": "available"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/store/order": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Place an order for a pet",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "order": {
+                    "value" : {
+                      "id": 0,
+                      "petId": 0,
+                      "quantity": 0,
+                      "shipDate": "2022-12-20T10:10:49.966Z",
+                      "status": "placed",
+                      "complete": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

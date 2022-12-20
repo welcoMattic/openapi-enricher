@@ -36,7 +36,9 @@ async function run(oaFile, options) {
     let examples = JSON.parse(fs.readFileSync(options.examplesFile, 'utf8'))
     Object.entries(oa.paths).forEach(([path, methods]) => {
         Object.entries(methods).forEach(([method, methodOptions]) => {
-            oa.paths[path][method] = Object.assign({}, methodOptions, examples.paths[path][method])
+            if (examples.paths.hasOwnProperty(path)) {
+                oa.paths[path][method] = Object.assign({}, methodOptions, examples.paths[path][method])
+            }
         });
     });
 

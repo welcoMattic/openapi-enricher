@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Enrich an OpenAPI spec with response examples",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --colors --verbose --reporters=default --no-cache --maxWorkers=2"
+  },
+  "directories": {
+    "test": "test"
   },
   "main": "index.js",
   "keywords": [
@@ -20,5 +23,8 @@
   },
   "engines": {
     "node": ">=16"
+  },
+  "devDependencies": {
+    "jest": "^29.3.1"
   }
 }
