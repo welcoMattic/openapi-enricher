@@ -1,0 +1,24 @@
+{
+  "name": "openapi-enricher",
+  "version": "1.0.0",
+  "description": "Enrich an OpenAPI spec with response examples",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "main": "index.js",
+  "keywords": [
+    "openapi",
+    "mock"
+  ],
+  "author": "Mathieu Santostefano",
+  "license": "MIT",
+  "bin": {
+    "openapi-mock-optimizer": "index.js"
+  },
+  "dependencies": {
+    "commander": "^9.4.1",
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
