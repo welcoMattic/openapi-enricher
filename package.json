@@ -1,6 +1,6 @@
 {
   "name": "openapi-enricher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Enrich an OpenAPI spec with response examples",
   "scripts": {
     "test": "jest --colors --verbose --reporters=default --no-cache --maxWorkers=2"
@@ -16,7 +16,7 @@
   "author": "Mathieu Santostefano",
   "license": "MIT",
   "bin": {
-    "openapi-mock-optimizer": "index.js"
+    "openapi-enricher": "openapi-enricher.js"
   },
   "dependencies": {
     "commander": "^9.4.1"
