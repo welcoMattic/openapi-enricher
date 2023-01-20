@@ -17,8 +17,8 @@ Basically, it will merge the `responses` entries of both files.
 
 ## Limitations
 
-* It supports only JSON OpenAPI spec (for now)
 * It support only examples for response in paths, not for components
+* It support only 1 examples file at a time
 
 ## Credits
 
