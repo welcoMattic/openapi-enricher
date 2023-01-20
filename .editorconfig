@@ -1,0 +1,3 @@
+[test/fixtures/**/*.{json, yaml, yml}]
+insert_final_newline = true
+indent_size = 2
