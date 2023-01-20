@@ -3,13 +3,15 @@
 
 const fs = require('fs')
 const program = require('commander')
+const yaml = require('@stoplight/yaml');
 
 program
     .arguments('<oaFile>')
     .usage('<file> [options]')
     .description(require('./package.json').description)
-    .option('-o, --output <output>', 'save the enriched OpenAPI file as JSON')
-    .option('-e, --examplesFile <examplesFile>', 'the file to specify HTTP response examples')
+    .option('-o, --output <output>', 'name of the enriched OpenAPI file')
+    .option('-e, --examplesFile <examplesFile>', 'file to specify HTTP response examples')
+    .option('-f, --format <format>', 'format used to read and write OpenAPI files (input and output), and examples file', 'json')
     .version(require('./package.json').version, '--version')
     .option('-v, --verbose', 'verbosity that can be increased', increaseVerbosity, 0)
     .action(run)
@@ -31,18 +33,47 @@ function increaseVerbosity(dummyValue, previous) {
 }
 
 async function run(oaFile, options) {
-    let oa = JSON.parse(fs.readFileSync(oaFile, 'utf8'))
+    const format = options.format
 
-    let examples = JSON.parse(fs.readFileSync(options.examplesFile, 'utf8'))
+    if (format !== 'json' && format !== 'yaml' && format !== 'yml') {
+        console.error('\x1b[31m', `--format option must be equal to "json", "yaml" or "yml"`)
+        return
+    }
+
+    let oa = ''
+    let examples = ''
+    switch (true) {
+        case format === 'json':
+            oa = JSON.parse(fs.readFileSync(oaFile, 'utf8'))
+            examples = JSON.parse(fs.readFileSync(options.examplesFile, 'utf8'))
+            break
+
+        case format === 'yaml':
+        case format === 'yml':
+            oa = yaml.parse(fs.readFileSync(oaFile, 'utf8'))
+            examples = yaml.parse(fs.readFileSync(options.examplesFile, 'utf8'))
+            break
+    }
+
     Object.entries(oa.paths).forEach(([path, methods]) => {
         Object.entries(methods).forEach(([method, methodOptions]) => {
             if (examples.paths.hasOwnProperty(path)) {
                 oa.paths[path][method] = Object.assign({}, methodOptions, examples.paths[path][method])
             }
-        });
-    });
+        })
+    })
 
-    let output = JSON.stringify(oa, null, 2)
+    let output = '';
+    switch (true) {
+        case format === 'json':
+            output = JSON.stringify(oa, null, 2)
+            break
+
+        case format === 'yaml':
+        case format === 'yml':
+            output = yaml.safeStringify(oa, { lineWidth: Infinity, indent: 2 })
+            break
+    }
 
     if (options.output) {
         try {

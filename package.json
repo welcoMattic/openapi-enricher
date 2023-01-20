@@ -1,6 +1,6 @@
 {
   "name": "openapi-enricher",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Enrich an OpenAPI spec with response examples",
   "scripts": {
     "test": "jest --colors --verbose --reporters=default --no-cache --maxWorkers=2"
@@ -11,7 +11,12 @@
   "main": "index.js",
   "keywords": [
     "openapi",
-    "mock"
+    "mock",
+    "yaml",
+    "yml",
+    "json",
+    "api",
+    "swagger"
   ],
   "author": "Mathieu Santostefano",
   "license": "MIT",
@@ -19,6 +24,7 @@
     "openapi-enricher": "openapi-enricher.js"
   },
   "dependencies": {
+    "@stoplight/yaml": "^4.2.3",
     "commander": "^9.4.1"
   },
   "engines": {
