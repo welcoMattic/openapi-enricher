@@ -58,7 +58,17 @@ async function run(oaFile, options) {
     Object.entries(oa.paths).forEach(([path, methods]) => {
         Object.entries(methods).forEach(([method, methodOptions]) => {
             if (examples.paths.hasOwnProperty(path)) {
-                oa.paths[path][method] = Object.assign({}, methodOptions, examples.paths[path][method])
+                for (const [statusCode, response] of Object.entries(methodOptions.responses)) {
+                    if (!response.hasOwnProperty('content')) {
+                        continue;
+                    }
+
+                    for (const contentType of Object.keys(response.content)) {
+                        if (examples['paths'][path][method]['responses'][statusCode]?.['content'][contentType]['examples']) {
+                            oa['paths'][path][method]['responses'][statusCode]['content'][contentType]['examples'] = examples['paths'][path][method]['responses'][statusCode]['content'][contentType]['examples']
+                        }
+                    }
+                }
             }
         })
     })
